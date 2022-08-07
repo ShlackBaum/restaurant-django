@@ -21,60 +21,16 @@ DATA = {
 }
 
 
-
-
-def index(request):
+def index(request, a):
     servings = request.GET.get('servings')
-    return HttpResponse("Главная работает")
-
-def omlet(request):
     if request.GET.get('servings') == None:
         servings = 1
     else:
         servings = int(request.GET.get('servings'))
     served_data = {}
-    for key, value in DATA['omlet'].items():
+    for key, value in DATA[a].items():
         served_data[key] = value * servings
     context = {
-        'recipe': served_data,
-        'servings': servings
+        'recipe': served_data
     }
     return render(request, 'calculator/index.html', context)
-
-def pasta(request):
-    if request.GET.get('servings') == None:
-        servings = 1
-    else:
-        servings = int(request.GET.get('servings'))
-    served_data = {}
-    for key, value in DATA['pasta'].items():
-        served_data[key] = value * servings
-    context = {
-        'recipe': served_data,
-        'servings': servings
-    }
-    return render(request, 'calculator/index.html', context)
-
-def buter(request):
-    if request.GET.get('servings') == None:
-        servings = 1
-    else:
-        servings = int(request.GET.get('servings'))
-    served_data = {}
-    for key, value in DATA['buter'].items():
-        served_data[key] = value * servings
-    context = {
-        'recipe': served_data,
-        'servings': servings
-    }
-    return render(request, 'calculator/index.html', context)
-
-
-
-# context = {
-#       'recipe': DATA['omlet']
-#       #     {
-#       #   'ингредиент1': количество1,
-#       #   'ингредиент2': количество2,
-#       # }
-#     }
